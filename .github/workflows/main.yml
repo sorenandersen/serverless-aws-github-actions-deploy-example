@@ -1,0 +1,28 @@
+name: Deploy serverless application on aWS
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Deploy
+        run: npm run sls -- deploy --region $REGION --stage $STAGE
+        env:
+          REGION: us-east-1
+          STAGE: staging
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
