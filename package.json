@@ -1,0 +1,20 @@
+{
+  "name": "serverless-aws-github-actions-ci-cd-example",
+  "version": "0.0.1",
+  "description": "Automated deployment of a serverless application with the Serverless Framework and GitHub Actions",
+  "license": "MIT",
+  "scripts": {
+    "sls": "serverless"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "aws-sdk": "^2.748.0",
+    "prettier": "^2.1.1",
+    "serverless": "^1.82.0",
+    "serverless-iam-roles-per-function": "^2.0.2"
+  },
+  "dependencies": {
+    "@dazn/lambda-powertools-logger": "^1.24.1"
+  }
+}

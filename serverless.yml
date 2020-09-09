@@ -1,0 +1,28 @@
+service: demo-github-actions
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  stage: ${opt:stage, 'dev'}
+  httpApi:
+    payload: "2.0"
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    LOG_LEVEL: ${self:custom.logLevel.${self:provider.stage}, self:custom.logLevel.default}
+
+plugins:
+  - serverless-iam-roles-per-function
+
+custom:
+  logLevel:
+    prod: WARN
+    default: DEBUG
+
+functions:
+  index:
+    handler: functions/index.handler
+    events:
+      - httpApi:
+          path: /
+          method: GET
