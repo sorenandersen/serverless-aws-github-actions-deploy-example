@@ -1,24 +1,24 @@
-name: Deploy serverless application on aWS
+name: Deploy serverless application on AWS
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - uses: actions/setup-node@v1
         with:
-          node-version: '12'
-      
+          node-version: "12"
+
       - name: Install dependencies
         run: npm ci
-        
+
       - name: Deploy
         run: npm run sls -- deploy --region $REGION --stage $STAGE
         env:
