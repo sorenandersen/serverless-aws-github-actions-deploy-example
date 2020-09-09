@@ -1,5 +1,5 @@
 {
-  "name": "serverless-aws-github-actions-ci-cd-example",
+  "name": "serverless-aws-github-actions-deploy-example",
   "version": "0.0.1",
   "description": "Automated deployment of a serverless application with the Serverless Framework and GitHub Actions",
   "license": "MIT",

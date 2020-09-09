@@ -1,6 +1,8 @@
-# serverless-aws-github-actions-ci-cd-example
+# serverless-aws-github-actions-deploy-example
 
 Sample project for demonstrating automated deployment of a serverless application with the Serverless Framework and GitHub Actions.
+
+The GHA workflow will run when code is pushed to `master`.
 
 ## Geting started
 
