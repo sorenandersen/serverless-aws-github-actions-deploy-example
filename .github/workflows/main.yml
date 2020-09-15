@@ -2,12 +2,14 @@ name: Deploy serverless application on AWS
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
   pull_request:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
-  deploy:
+  integration-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +21,39 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Deploy
+      - name: Deploy to stage $STAGE
+        run: npm run sls -- deploy --region $REGION --stage $STAGE
+        env:
+          REGION: us-east-1
+          STAGE: ci-test
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Run integration tests
+        run: npm run integration-test
+
+      - name: Remove from stage $STAGE
+        run: npm run sls -- remove --region $REGION --stage $STAGE
+        env:
+          REGION: us-east-1
+          STAGE: ci-test
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  deploy:
+    needs: integration-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Deploy to stage $STAGE
         run: npm run sls -- deploy --region $REGION --stage $STAGE
         env:
           REGION: us-east-1

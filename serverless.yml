@@ -21,7 +21,7 @@ custom:
 
 functions:
   index:
-    handler: functions/index.handler
+    handler: src/functions/index.handler
     events:
       - httpApi:
           path: /

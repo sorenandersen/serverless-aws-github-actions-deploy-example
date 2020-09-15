@@ -1,17 +1,21 @@
 {
   "name": "serverless-aws-github-actions-deploy-example",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Automated deployment of a serverless application with the Serverless Framework and GitHub Actions",
   "license": "MIT",
   "scripts": {
-    "sls": "serverless"
+    "sls": "serverless",
+    "integration-test": "jest"
   },
   "keywords": [],
   "author": "",
   "devDependencies": {
-    "aws-sdk": "^2.748.0",
+    "@types/jest": "^26.0.13",
+    "aws-sdk": "^2.752.0",
+    "jest": "^26.4.2",
+    "lodash": "^4.17.20",
     "prettier": "^2.1.1",
-    "serverless": "^1.82.0",
+    "serverless": "^2.0.0",
     "serverless-iam-roles-per-function": "^2.0.2"
   },
   "dependencies": {
