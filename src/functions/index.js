@@ -1,6 +1,6 @@
 module.exports.handler = async (event, context) => {
   return {
     statusCode: 200,
-    body: JSON.stringify({ oops: 'Deliberately making test fail ...' }),
+    body: JSON.stringify({ message: 'Hello, world' }),
   }
 }
